@@ -22,10 +22,12 @@ class Authentication extends Controller
                 'address' => $request->address,
                 'region' => $request->region,
                 'password' => bcrypt($request->password),
+                'user' => true,
             ]);
 
             return $user;
     }
+
     public function login(Request $request){
 
         $credentials = $request->validate([
@@ -41,10 +43,12 @@ class Authentication extends Controller
             {
                 $link = "/Lawyer";
             }
+
             if($user->admin)
             {
                 $link = "/Admin/Dashboard";
             }
+
             if($user->user)
             {
                 $link = "/Home/Chats";
